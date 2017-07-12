@@ -1,5 +1,7 @@
 ### Choo tutorial
 
+from [this](https://handbook.choo.io/your-first-choo-app/) tutorial
+
 Build with `webpack` then visit index.html
 
 To develop run `webpack --watch`
