@@ -13,12 +13,20 @@ module.exports = function (state, emit) {
     emit('addAnimal', obj)
   }
 
+  function removeAnimal (event) {
+    emit('removeAnimal', event.target.id)
+  }
+
+  function animalMap (obj, i) {
+    return animal(removeAnimal, obj, i)
+  }
+
   // create html template
   return html`
     <div class="container">
       <div class="grass">
         <img src="assets/img/bg.gif" onclick=${addAnimal} />
-        ${state.animals.map(animal)}
+        ${state.animals.map(animalMap)}
       </div>
     </div>
   `

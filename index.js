@@ -15,6 +15,7 @@ app.route('/', templates.main)
 app.use(function (state, emitter) {
   state.availableAnimals = ['crocodile', 'koala', 'lion', 'tiger', 'walrus']
   state.animals = [] 
+
   emitter.on('addAnimal', function (animalObj) {
     const randomAnimalType = state.availableAnimals[
       Math.floor(
@@ -29,6 +30,12 @@ app.use(function (state, emitter) {
     }
 
     state.animals.push(obj)
+    emitter.emit('render')
+  })
+
+  // remove animal
+  emitter.on('removeAnimal', function (i) {
+    state.animals.splice(i, 1)
     emitter.emit('render')
   })
 })
