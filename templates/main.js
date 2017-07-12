@@ -18,6 +18,9 @@ module.exports = function (state, emit) {
   }
 
   function animalMap (obj, i) {
+    // Get the "type" URL parameter
+    const type = state.params.type
+    if (type && type !== obj.type) return
     return animal(removeAnimal, obj, i)
   }
 
@@ -25,8 +28,18 @@ module.exports = function (state, emit) {
   return html`
     <div class="container">
       <div class="grass">
-        <img src="assets/img/bg.gif" onclick=${addAnimal} />
+        <img src="/assets/img/bg.gif" onclick=${addAnimal} />
         ${state.animals.map(animalMap)}
+      </div>
+      <div class="controls">
+        <ul class="filters">
+          <li><a href="/">all</a></li>
+          <li><a href="/filter/crocodile">crocodiles</a></li>
+          <li><a href="/filter/koala">koalas</a></li>
+          <li><a href="/filter/lion">lions</a></li>
+          <li><a href="/filter/tiger">tigers</a></li>
+          <li><a href="/filter/walrus">walruses</a></li>
+        </ul>
       </div>
     </div>
   `

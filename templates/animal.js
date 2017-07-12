@@ -8,6 +8,6 @@ module.exports = function (onclick, animal, animalIndex) {
 
   // create html template
   return html`
-    <img src="assets/img/${type}.gif" style="left: ${x}px; top: ${y}px;" id=${animalIndex} onclick=${onclick}>
+    <img src="/assets/img/${type}.gif" style="left: ${x}px; top: ${y}px;" id=${animalIndex} onclick=${onclick}>
   `
 }

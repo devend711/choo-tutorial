@@ -11,20 +11,31 @@ const templates = {
 
 // Routes
 app.route('/', templates.main)
+app.route('/filter/:type', templates.main)
 
 app.use(function (state, emitter) {
   state.availableAnimals = ['crocodile', 'koala', 'lion', 'tiger', 'walrus']
   state.animals = [] 
 
-  emitter.on('addAnimal', function (animalObj) {
-    const randomAnimalType = state.availableAnimals[
+  function getRandomAnimalType () {
+    return state.availableAnimals[
       Math.floor(
         Math.random() * state.availableAnimals.length
       )
     ]
+  }
+
+  emitter.on('addAnimal', function (animalObj) {
+    let animalType = ''
+
+    if (state.availableAnimals.includes(state.params.type)) {
+      animalType = state.params.type
+    } else {
+      animalType = getRandomAnimalType()   
+    }
 
     const obj = {
-      type: randomAnimalType,
+      type: animalType,
       x: animalObj.x,
       y: animalObj.y
     }
